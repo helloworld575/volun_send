@@ -120,5 +120,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-AUTH_USER_MODEL="send.NewUser"
 #LOGIN_URL = "/send/login/?next='article_id'"
