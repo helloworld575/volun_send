@@ -12,8 +12,10 @@ from django.utils import timezone
 
 
 @python_2_unicode_compatible
-class StudentUser(models.Model):
+class Users(models.Model):
     user = models.OneToOneField(User)
+    user_type= models.IntegerField(default=0)
+    phone_number = models.CharField(max_length=20)
 
     GENDER_CHOICES = (
         ('女','Male'),
@@ -34,19 +36,12 @@ class StudentUser(models.Model):
     sum_volun_time = models.IntegerField(default=0)
     bad_record = models.IntegerField(default=0)
 
-
-    def __str__(self):
-        return self.user.username
-
-class TeacherUser(models.Model):
     SENDORGET = (
         ('send','send'),
         ('get','get'),
     )
-    user=models.OneToOneField(User)
     send_or_get = models.CharField(max_length=5,choices = SENDORGET)
     address = models.EmailField(max_length=256)
-    phone_number = models.CharField(max_length=20)
     sum_order_num = models.IntegerField(default=0)
 
     def __str__(self):
@@ -66,9 +61,8 @@ class OrderForm(models.Model):
         ('1','on_the_way'),
         ('2','has_send'),
     )
-    teachers = models.ManyToManyField(TeacherUser)
+    users_using = models.ManyToManyField(Users)
     # get_people = models.ForeignKey(TeacherUser)
-    send_student = models.ForeignKey(StudentUser)
 
     get_address = models.CharField(max_length = 256)
     send_address = models.CharField(max_length = 256)

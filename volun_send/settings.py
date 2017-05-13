@@ -55,7 +55,7 @@ ROOT_URLCONF = 'volun_send.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +121,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 #LOGIN_URL = "/send/login/?next='article_id'"
+AUTH_PROFILE_MODULE='send.Users'
+LOGIN_URL="/send/login"
