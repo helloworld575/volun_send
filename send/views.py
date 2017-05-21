@@ -13,15 +13,18 @@ from django.core.urlresolvers import reverse
 from .utils import teacher_check,student_check
 
 def index(request):
-    if request.user.is_authenticated()==False:
-        return render(request,'index.html')
-    if request.user.get_profile().user_type==1:
-        return render(request,'student.html',{'user':request.user})
-    elif request.user.get_profile().user_typej==2:
-        return render(request,'teacher.html',{'user':request.user})
+    return render(request,'index_login.html')
+    '''if request.user.is_authenticated()==False:
+        return render(request,'index_login.html')
+    if request.user.userprofile.user_type==1:
+        return render(request,'index_student.html',{'user':request.user})
+    elif request.user.userprofile.user_type==2:
+        return render(request,'index_teacher.html',{'user':request.user})'''
+def forget_password(request):
+    return render(request,'password.html')
 
 def signup(request):
-    pass
+    return render(request,'signup.html')
 
 def login(request):
     pass

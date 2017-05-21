@@ -10,6 +10,23 @@ from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 
+class FormManager(models.Manager):
+    def query_on_the_way(self):
+        query=self.get_queryset().filter(order_case='1')
+        return query
+    def query_without_send(self):
+        query=self.get_queryset().filter(order_case='0')
+        return query
+    def query_has_send(self):
+        query=self.get_queryset().filter(order_case='2')
+        return query
+    def query_get_query(self,slow_or_fast):
+        if slow_or_fast=='0':
+            query=self.get_queryset().filter(slow_or_fast='0')
+        if slow_or_fast=='1':
+            query=self.get_queryset().filter(slow_or_fast='1')
+        return query
+
 
 @python_2_unicode_compatible
 class Users(models.Model):
@@ -90,7 +107,7 @@ class OrderForm(models.Model):
     #
     # has_got_order = models.ForeignKey(StudentUser)
     # has_send_order = models.ForeignKey(StudentUser)
-
+    objects=FormManager()
     def __str__(self):
         return self.order_number
     def get_first_order(self):
