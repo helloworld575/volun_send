@@ -13,17 +13,41 @@ from django.core.urlresolvers import reverse
 from .utils import teacher_check,student_check
 
 def index(request):
-    return render(request,'index_login.html')
-    '''if request.user.is_authenticated()==False:
+    if not request.user.is_authenticated():
         return render(request,'index_login.html')
-    if request.user.userprofile.user_type==1:
+    if request.user.users.user_type==1:
         return render(request,'index_student.html',{'user':request.user})
-    elif request.user.userprofile.user_type==2:
-        return render(request,'index_teacher.html',{'user':request.user})'''
+    elif request.user.users.user_type==2:
+        return render(request,'index_teacher.html',{'user':request.user})
 def forget_password(request):
     return render(request,'password.html')
 
 def signup(request):
+    if request.user.is_authenticated():
+        HttpResponseRedirect(reverse('send_index'))
+    if request.method == 'POST':
+        password = request.POST.get('password', '')
+        repeat_password = request.POST.get('repeat_password', '')
+        if password == '' or repeat_password == '':
+            state = 'empty'
+        elif password != repeat_password:
+            state = 'repeat_error'
+        else:
+            username = request.POST.get('username', '')
+            if User.objects.filter(username=username):
+                state = 'user_exist'
+            else:
+                new_user = User.objects.create_user(username=username, password=password,
+                                                    email=request.POST.get('email', ''))
+                new_user.save()
+                new_my_user = MyUser(user=new_user, nickname=request.POST.get('nickname', ''))
+                new_my_user.save()
+                state = 'success'
+    content = {
+        'active_menu': 'homepage',
+        'state': state,
+        'user': None,
+    }
     return render(request,'signup.html')
 
 def login(request):
