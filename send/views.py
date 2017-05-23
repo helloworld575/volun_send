@@ -13,48 +13,68 @@ from django.core.urlresolvers import reverse
 from .utils import teacher_check,student_check
 
 def index(request):
-    if not request.user.is_authenticated():
-        return render(request,'index_login.html')
-    if request.user.users.user_type==1:
-        return render(request,'index_student.html',{'user':request.user})
-    elif request.user.users.user_type==2:
-        return render(request,'index_teacher.html',{'user':request.user})
+    if request.user.is_authenticated():
+        if request.user.users.user_type==1:
+            return render(request,'index_student.html',{'user':request.user})
+        elif request.user.users.user_type==2:
+            return render(request,'index_teacher.html',{'user':request.user})
+    state=''
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            if request.user.users.user_type==1:
+                return render(request,'index_student.html',{'user':request.user})
+            elif request.user.users.user_type==2:
+                return render(request,'index_teacher.html',{'user':request.user})
+        else:
+            state = 'not_exist_or_password_error'
+    content = {
+        'state': state,
+    }
+    return render(request, 'index_login.html', content)
+
+
 def forget_password(request):
     return render(request,'password.html')
 
-def signup(request):
+def sign_up(request):
+    state=''
     if request.user.is_authenticated():
-        HttpResponseRedirect(reverse('send_index'))
+        return HttpResponseRedirect(reverse('send_index'))
+
     if request.method == 'POST':
-        password = request.POST.get('password', '')
-        repeat_password = request.POST.get('repeat_password', '')
-        if password == '' or repeat_password == '':
+        password1 = request.POST.get('password1', '')
+        password2 = request.POST.get('password2', '')
+        user_type = 1 if request.POST.get('user_type')=="student" else 2
+        if password1 == '' or password2 == '':
             state = 'empty'
-        elif password != repeat_password:
+        elif password1 != password2:
             state = 'repeat_error'
         else:
             username = request.POST.get('username', '')
             if User.objects.filter(username=username):
                 state = 'user_exist'
             else:
-                new_user = User.objects.create_user(username=username, password=password,
+                new_user = User.objects.create_user(username=username, password=password1,
                                                     email=request.POST.get('email', ''))
                 new_user.save()
-                new_my_user = MyUser(user=new_user, nickname=request.POST.get('nickname', ''))
+                new_my_user = Users(user=new_user,user_type=user_type)
                 new_my_user.save()
                 state = 'success'
     content = {
-        'active_menu': 'homepage',
         'state': state,
-        'user': None,
     }
-    return render(request,'signup.html')
 
-def login(request):
+    return render(request,'signup.html',content)
+
+def log_in(request):
     pass
 
 @login_required
-def logout(request):
+def log_out(request):
     auth.logout(request)
     return redirect('index.html')
 

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block title %}注册{% endblock %}
 {% block righttoplink %}
-                            <li class="btn-cta"><a href="{% url 'send_index' %}"><span>登录</span></a></li>
+<li class="btn-cta"><a href="{% url 'send_index' %}"><span>登录</span></a></li>
 {% endblock %}
 {% block content %}
         <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_1.jpg" %})" >
@@ -17,17 +17,37 @@
                                 <div align="center" >
                                     <img src="url({% static "images/logo_small.png" %}" alt=""/>
                                 </div>
-                                <form>
-                                    <select>
+                                {% if state == 'success' %}
+                                  <div>
+                                    <h2 class="text-center" style="color:yellow">注册成功！</h2>
+                                  </div>
+                                  {% elif state == 'repeat_error' %}
+                                  <div>
+                                    <h2 class="text-center" style="color:red">密码重复错误</h2>
+                                  </div>
+                                  {% elif state == 'empty' %}
+                                  <div>
+                                    <h2 class="text-center" style="color:red">密码不能为空</h2>
+                                  </div>
+                                  {% elif state == 'user_exist' %}
+                                  <div>
+                                    <h2 class="text-center" style="color:red">用户已经存在</h2>
+                                  </div>
+                                  {% endif %}
+                                <form method="POST" role="form">
+                                  {% csrf_token %}
+                                    <select name='user_type'>
                                         <option value ="teacher">教师账号</option>
                                         <option value ="student">学生账号</option>
                                     </select>
                                     <p>账号</p>
-                                    <input type="text" class="text" value="仅英文和数字" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+                                    <input type="text" required name='username' class="text" value="请输入学号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
                                     <p>密码</p>
-                                    <input type="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                                    <input type="password" required name='password1' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                                    <p>密码</p>
+                                    <input type="password" required name='password2' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Repeat Password';}">
                                     <p>邮箱</p>
-                                    <input type="text" class="text" value="用于忘记密码的验证" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
+                                    <input type="text" required name='email' class="text" value="用于忘记密码的验证" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
 
                                     <div class="submit">
                                         <input type="submit" onclick="myFunction()" value="注册" >

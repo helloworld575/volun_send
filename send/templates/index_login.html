@@ -17,9 +17,15 @@
                                 <div align="center" >
                                     <img src="url({% static "images/logo_small.png" %})" alt=""/>
                                 </div>
-                                <form>
-                                    <input type="text" class="text" value="用户名/学号/职工号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
-                                    <input type="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                                {% if state == 'not_exist_or_password_error' %}
+                                <div>
+                                  <h2 class="text-center" style="color:red">用户不存在或密码错误</h2>
+                                </div>
+                                {% endif %}
+                                <form method="POST" role="form" >
+                                  {% csrf_token %}
+                                    <input type="text" required name='username' class="text" value="学号/职工号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+                                    <input type="password" required name='password' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 
                                     <div class="submit">
                                         <input type="submit" onclick="myFunction()" value="LOGIN" >

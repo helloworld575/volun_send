@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^send/',include(send_urls)),
     url(r'^$',views.index,name="index"),
     url(r'^forget_password',views.forget_password,name="forget_password"),
-    url(r'^signup',views.signup,name="signup"),
+    url(r'^signup',views.sign_up,name="signup"),
 ]
