@@ -36,6 +36,34 @@ def index(request):
     }
     return render(request, 'index_login.html', content)
 
+@login_required
+def set_password(request):
+    state=''
+    user=request.user
+    if not request.user.is_authenticated():
+        state="please login first"
+
+    if request.method == 'POST':
+        password = request.POST.get('password', '')
+        password1 = request.POST.get('password1', '')
+        password2 = request.POST.get('password2', '')
+
+        if user.check_password(password):
+            if not new_password:
+                state = 'empty'
+            elif new_password != repeat_password:
+                state = 'repeat_error'
+            else:
+                user.set_password(new_password)
+                user.save()
+                state = 'success'
+        else:
+            state = 'password_error'
+    content = {
+        'user': user,
+        'state': state,
+    }
+    return render(request, 'password.html', content)
 
 def forget_password(request):
     return render(request,'password.html')
@@ -69,9 +97,6 @@ def sign_up(request):
     }
 
     return render(request,'signup.html',content)
-
-def log_in(request):
-    pass
 
 @login_required
 def log_out(request):

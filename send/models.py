@@ -46,7 +46,10 @@ class Users(models.Model):
         ('硕士','硕士'),
         ('博士', '博士'),
     )
-
+    pass_question1=models.CharField(max_length=100)
+    pass_answer1=models.CharField(max_length=50)
+    pass_question2=models.CharField(max_length=100)
+    pass_answer2=models.CharField(max_length=50)
     gender = models.CharField(max_length=2,choices=GENDER_CHOICES)
     grade = models.CharField(max_length=5,choices = GRADE_CHOICES)
     Institute = models.CharField(max_length=50)
