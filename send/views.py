@@ -47,14 +47,14 @@ def set_password(request):
         password = request.POST.get('password', '')
         password1 = request.POST.get('password1', '')
         password2 = request.POST.get('password2', '')
-
-        if user.check_password(password):
-            if not new_password:
+        email=request.POST.get('email','')
+        if user.check_password(password) and user.email==email:
+            if not password1:
                 state = 'empty'
-            elif new_password != repeat_password:
+            elif password2 != password1:
                 state = 'repeat_error'
             else:
-                user.set_password(new_password)
+                user.set_password(password1)
                 user.save()
                 state = 'success'
         else:
@@ -63,10 +63,36 @@ def set_password(request):
         'user': user,
         'state': state,
     }
-    return render(request, 'password.html', content)
+    return render(request, 'set_password.html', content)
 
 def forget_password(request):
-    return render(request,'password.html')
+    state=''
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        if username!='':
+            if User.objects.filter(username=username):
+                password1 = request.POST.get('password1', '')
+                password2 = request.POST.get('password2', '')
+                email=request.POST.get('email','')
+                user=User.objects.get(username=username)
+                if user.email == email:
+                    if password1==password2:
+                        user.set_password(password1)
+                        user.save()
+                        state='succeed'
+                    else:
+                        state="password_not_the_same"
+                else:
+                    state='wrong_email'
+            else:
+                state="user_not_exist"
+        else:
+            state="null_user_name"
+
+    content = {
+        'state': state,
+    }
+    return render(request, 'password.html', content)
 
 def sign_up(request):
     state=''
@@ -101,23 +127,9 @@ def sign_up(request):
 @login_required
 def log_out(request):
     auth.logout(request)
-    return redirect('index.html')
+    return redirect('send_index')
 
-def setpassword(request):
-    pass
-
-@user_passes_test(teacher_check)
-def add_send(request):
-    pass
-
-@user_passes_test(teacher_check)
-def request_details(request):
-    pass
-
-@user_passes_test(student_check)
-def request_send(request):
-    pass
-
-@user_passes_test(student_check)
-def response_details(request):
-    pass
+def stu_get_detail(request):
+    return render(request,"student.html")
+def email(request):
+    return render(request,"email.html")

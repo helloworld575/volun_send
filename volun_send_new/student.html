@@ -1,10 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{% endblock %}</title>
+    <title>index_teacher</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -23,31 +22,32 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 
     <!-- Animate.css -->
-    <link rel="stylesheet" href="{% static "css/animate.css" %}">
+    <link rel="stylesheet" href="css/animate.css">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="{% static "css/icomoon.css" %}">
+    <link rel="stylesheet" href="css/icomoon.css">
     <!-- Themify Icons-->
-    <link rel="stylesheet" href="{% static "css/themify-icons.css" %}">
+    <link rel="stylesheet" href="css/themify-icons.css">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="{% static "css/bootstrap.css"%}">
+    <link rel="stylesheet" href="css/bootstrap.css">
 
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="{% static "css/magnific-popup.css" %}">
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
     <!-- Owl Carousel  -->
-    <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
-    <link rel="stylesheet" href="{% static "css/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
     <!-- Theme style  -->
-    <link rel="stylesheet" href="{% static "css/style.css" %}">
-    <link href="{% static "css/style2.css" %}" rel='stylesheet' type='text/css' >
-    <link href="{% static "css/form-style.css"%}" rel='stylesheet' type='text/css' >
-    <link rel="stylesheet" href="{% static "css2/style.css" %}" type="text/css" >
-    <link rel="stylesheet" href="{% static "css/templatemo-style.css" %}" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style2.css" rel='stylesheet' type='text/css' >
+    <link href="css/form-style.css" rel='stylesheet' type='text/css' >
+    <link title="style1" rel="stylesheet" href="css2/style.css" type="text/css" >
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400">
+
 
     <!-- Modernizr JS -->
-    <script src="{% static "js/modernizr-2.6.2.min.js" %}"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
@@ -55,11 +55,11 @@
 </head>
 
 <body>
-<div class="container-fluid" style="background-image: url({% static "images/img_4_5.jpg"%})">
+<div class="container-fluid" style="background-image: url(images/img_4_5.jpg)">
 
     <section id="welcome" class="tm-content-box tm-banner margin-b-10">
         <div align="left" >
-            <a href="{% url "send_index" %}"><img src="url({% static 'images/logo_small.png'%})" alt=""/></a>
+            <a href="index_student.html"><img src="images/logo_small.png" alt=""/></a>
         </div>
     </section>
 
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static 'images/welcome.png'%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="images/welcome.png" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/ontheway.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="images/ontheway.png" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
                 <div class="tm-box-pad tm-services-description-container">
                     <fieldset>
@@ -321,7 +321,7 @@
                     <form action="#" method="post">
                         <div class="left-agileinfo">
                             <div class="tm-services-img-container">
-                                <img src="url({% static "images/paper-plane.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                                <img src="images/paper-plane.png" alt="Green Field" class="img-fluid tm-services-img">
                             </div>
                         </div>
                         <div class="right-agileits-w3layouts">
@@ -395,7 +395,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/backpack.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="images/backpack.png" alt="Green Field" class="img-fluid tm-services-img">
                     <fieldset>
                         <div class="form-row">
                             <div class="field-label"><label for="field1">累计志愿时长</label>:</div>
@@ -451,7 +451,7 @@
             <div id="protect" class="tm-content-box tm-gray-bg tm-services">
 
                 <div class="tm-services-img-container">
-                    <img src="url({%static "images/medicine.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="images/medicine.png" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -461,7 +461,7 @@
 
                 </div>
             <div align="center">
-                <input type="submit"  value="设置密保" onclick="{location.href='{% url 'email'}" />
+                <input type="submit"  value="设置密保" onclick="{location.href='email.html'}" />
             </div>
                 <br/>
                 <br/>
@@ -472,7 +472,7 @@
 
                 <div class="tm-services-img-container">
                     <br/>
-                    <img src="url({% static "images/glove.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="images/glove.png" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -486,7 +486,7 @@
                 <br/>
                 <br/>
                 <div align="center">
-                    <input type="submit"  value="修改密码" onclick="{location.href='{% url "set_password" %}'}" />
+                    <input type="submit"  value="修改密码" onclick="{location.href='password.html'}" />
                 </div>
                 <br/>
                 <br/>
@@ -500,10 +500,10 @@
 
 <!-- load JS files -->
 
-<script src="{% static "js/jquery-1.11.3.min.js"%}"></script>             <!-- jQuery (https://jquery.com/download/) -->
+<script src="js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
 <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script> <!-- Tether for Bootstrap (http://stackoverflow.com/questions/34567939/how-to-fix-the-error-error-bootstrap-tooltips-require-tether-http-github-h) -->
-<script src="{% static "js/jquery.magnific-popup.min.js"%}"></script>     <!-- Magnific pop-up (http://dimsemenov.com/plugins/magnific-popup/) -->
-<script src="{% static "js/jquery.singlePageNav.min.js"%}"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
+<script src="js/jquery.magnific-popup.min.js"></script>     <!-- Magnific pop-up (http://dimsemenov.com/plugins/magnific-popup/) -->
+<script src="js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
 
 <!-- Templatemo scripts -->
 <script>

@@ -15,7 +15,7 @@
                             <div class="login-form">
                                 <!--h1>Member Login</h1-->
                                 <div align="center" >
-                                    <img src="url({% static "images/logo_small.png" %})" alt=""/>
+                                    <img src="{% static "images/logo_small.png" %}" />
                                 </div>
                                 {% if state == 'not_exist_or_password_error' %}
                                 <div>
@@ -27,7 +27,7 @@
                                     <input type="text" required name='username' class="text" value="学号/职工号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
                                     <input type="password" required name='password' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
 
-                                    <div class="submit">
+                                    <div class="submit text-center">
                                         <input type="submit" onclick="myFunction()" value="LOGIN" >
                                     </div>
                                     <p><a href="{% url 'forget_password' %}">忘记密码？</a></p>

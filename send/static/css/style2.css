@@ -50,17 +50,44 @@ body{
 	-moz-opacity:0;
 	-khtml-opacity:0;
 }
-#dialog {
+
+#fullbg2 {
+	background-color: #ffffff;
+	left:0;
+	opacity:0.0;
+	position:absolute;
+	top:0;
+	z-index:3;
+	filter:alpha(opacity=50);
+	-moz-opacity:0;
+	-khtml-opacity:0;
+}
+#dialog2 {
 	background-color:#fff;
 	border:5px solid rgba(0,0,0,0);
-	height:500px;
+	height:300px;
 	left:50%;
-	margin:-250px 0 0 -250px;
+	margin:-150px 0 0 -475px;
 	padding:1px;
 	position:fixed !important; /* 浮动对话框 */
 	position:absolute;
 	top:50%;
-	width:500px;
+	width:250px;
+	z-index:5;
+	border-radius:5px;
+	display:none;
+}
+#dialog {
+	background-color:#fff;
+	border:5px solid rgba(0,0,0,0);
+	height:525px;
+	left:50%;
+	margin:-275px 0 0 -475px;
+	padding:1px;
+	position:fixed !important; /* 浮动对话框 */
+	position:absolute;
+	top:50%;
+	width:725px;
 	z-index:5;
 	border-radius:5px;
 	display:none;
@@ -165,6 +192,7 @@ input[type="text"]:hover, input[type="password"]:hover{
 	-ms-transition:	0.5s;
 
 }
+/*
 input[type="submit"]{
 	width: 99%;
 	padding: 3%;
@@ -194,6 +222,7 @@ input[type="submit"]:hover{
 	background:#128A42;
 	color:#fff;
 }
+*/
 /****************/
 /*-----start-responsive-design------*/
 @media (max-width:1440px){

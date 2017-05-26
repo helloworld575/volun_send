@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block title %}学生{% endblock %}
-    {% block script %}
+{% block script %}
     <script type="text/javascript">
         //显示灰色 jQuery 遮罩层
         function showBg() {
@@ -20,23 +20,21 @@
         }
 
         </script>
-        {% endblock %}
-
+{% endblock %}
 {% block righttoplink %}
-                            <li><a href="#">微快递服务说明</a></li>
-                            <!--li><a href="#">Tour</a></li-->
-                            <li class="has-dropdown">
-                                <a href="#">个人中心</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">个人资料</a></li>
-                                    <li><a href="#">退出登录</a></li>
-                                    <!--li><a href="#">Branding</a></li>
-                                    <li><a href="#">API</a></li-->
-                                </ul>
-                            </li>
+        <li><a href="#">微快递服务说明</a></li>
+        <!--li><a href="#">Tour</a></li-->
+        <li class="has-dropdown">
+            <a href="#">个人中心</a>
+            <ul class="dropdown">
+                <li><a href="#">个人资料</a></li>
+                <li><a href="{% url 'log_out' %}">退出登录</a></li>
+                <!--li><a href="#">Branding</a></li>
+                <li><a href="#">API</a></li-->
+            </ul>
+        </li>
 {% endblock %}
 {% block content %}
-<!--这是主页面-->
         <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_3.jpg" %})" >
             <div class="overlay"></div>
             <div class="gtco-container">
@@ -47,56 +45,91 @@
 
                             </div>
                             <div class="col-md-4 col-md-push-2 animate-box" data-animate-effect="fadeInRight">
-                                <button type="submit" class="btn btn-primary" onclick="showBg();" >我要送件</button>
+                                <a style="color:white" class="btn btn-primary" onclick="showBg();" >我要送件</a>
+                            </div>
 
                                 <div id="fullbg"></div>
                                 <div id="dialog">
-                                    <p class="close"><a href="#" onclick="closeBg();">X</a></p>
-                                    <fieldset>
-                                        <!--legend>ACCOUNT DETAILS</legend-->
-                                        <div class="form-row">
-                                            <div class="field-label"><label for="field1">下单方式</label>:</div>
-                                            <div class="field-widget">
-                                                <select id="field1" name="field1" class="validate-selection" title="Choose your department">
-                                                    <option>请选择</option>
-                                                    <option>立即送件</option>
-                                                    <option>预约送件</option>
-                                                </select>
+                                    <button class="close"><a href="#" onclick="closeBg();">&nbsp;X&nbsp;</a></button>
+                                    <div class="donate_form_w3l">
+
+                                        <form action="#" method="post">
+                                            <div class="left-agileinfo">
+                                                <div class="tm-services-img-container">
+                                                    <img src="url({% static 'images/paper-plane.png' %})" alt="Green Field" class="img-fluid tm-services-img">
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="right-agileits-w3layouts">
+                                                <fieldset>
+                                                    <!--legend>ACCOUNT DETAILS</legend-->
+                                                    <div class="form-row">
+                                                        <div class="field-label"><label for="field1">下单方式</label>:</div>
+                                                        <div class="field-widget">
+                                                            <select id="field1" name="field1" class="validate-selection" title="Choose your department">
+                                                                <option>请选择</option>
+                                                                <option>立即送件</option>
+                                                                <option>预约送件</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                        <div class="form-row">
-                                            <div class="field-label"><label for="field2">取件地点</label>:</div>
-                                            <div class="field-widget">
-                                                <select id="field2" name="field2" class="validate-selection" title="Choose your department">
-                                                    <option>请选择</option>
-                                                    <option>一区</option>
-                                                    <option>二区</option>
-                                                    <option>三区</option>
-                                                    <option>科学园</option>
-                                                </select>
+                                                    <div class="form-row">
+                                                        <div class="field-label"><label for="field2">取件地点</label>:</div>
+                                                        <div class="field-widget">
+                                                            <select id="field2" name="field2" class="validate-selection" title="Choose your department">
+                                                                <option>请选择</option>
+                                                                <option>一区</option>
+                                                                <option>二区</option>
+                                                                <option>三区</option>
+                                                                <option>科学园</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="field-label"><label for="field3">送件地点</label>:</div>
+                                                        <div class="field-widget">
+                                                            <select id="field3" name="field3" class="validate-selection" title="Choose your department">
+                                                                <option>请选择</option>
+                                                                <option>一区</option>
+                                                                <option>二区</option>
+                                                                <option>三区</option>
+                                                                <option>科学园</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="field-label"><label for="field4">送件时间</label>:</div>
+                                                        <div class="field-widget"><input name="field4" id="field4" class="required" title="请输入" /></div>
+                                                    </div>
+
+                                                </fieldset>
+
                                             </div>
-                                        </div>
 
-                                        <div class="form-row">
-                                            <div class="field-label"><label for="field3">寄件人</label>:</div>
-                                            <div class="field-widget"><input name="field3" id="field3" class="required" title="请输入" /></div>
-                                        </div>
+                                            <div align="center">
+                                                <input type="submit"  value="确认" />
+                                            </div>
 
-                                    </fieldset>
-                                    <input type="submit" class="submit2" value="Submit" />
+                                        </form>
 
-                                </div>
+
+
+
+
+                                    </div>
+
+
+
 
                             </div>
                             <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
                                 <p><a></a><p>
                             </div>
+
                             <div class="col-md-4 col-md-push-2 animate-box" data-animate-effect="fadeInRight">
-                                <button type="submit" class="btn btn-primary" onclick="student.html">我的志愿</button>
-
-
-
+                                <a style="color:white"class="btn btn-primary" onclick="{location.href='{% url "student" %}'}">我的志愿</a>
                             </div>
                         </div>
 

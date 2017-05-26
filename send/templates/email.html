@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}修改邮箱{% endblock %}
+{% block righttoplink %}
+                            <li class="btn-cta"><a href="index_login.html"><span>登录</span></a></li>
+{% block righttoplink %}
+{% block content %}
+        <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4_1.jpg)" >
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0 text-left">
+
+                        <div class="main">
+                            <div class="login-form">
+                                <!--h1>Member Login</h1-->
+                                <div align="center" >
+                                    <img src="{% static "images/logo_small.png" %}" alt=""/>
+                                </div>
+                                <form method="POST" role="form">
+                                    <select>
+                                        <option value ="teacher">教师账号</option>
+                                        <option value ="student">学生账号</option>
+                                    </select>
+                                    <p>账号</p>
+                                    <input type="text" class="text" required name='username' value="仅英文和数字" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
+                                    <p>密码</p>
+                                    <input type="password" required name='password' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                                    <p>邮箱</p>
+                                    <input type="text" class="text" required name='email' value="用于忘记密码的验证" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
+
+                                    <div class="submit" align="center">
+                                        <input type="submit" onclick="myFunction()" value="修改邮箱" >
+                                    </div>
+                                </form>
+                            </div>
+                            <!--//End-login-form-->
+                        </div>
+                        <!-----//end-main---->
+
+
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock %}
