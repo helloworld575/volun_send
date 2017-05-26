@@ -33,6 +33,7 @@ class Users(models.Model):
     user = models.OneToOneField(User)
     user_type= models.IntegerField(default=0)
     phone_number = models.CharField(max_length=20)
+    nick_name=models.CharField(max_length=20)
 
     GENDER_CHOICES = (
         ('女','Male'),
@@ -53,6 +54,8 @@ class Users(models.Model):
     gender = models.CharField(max_length=2,choices=GENDER_CHOICES,default='')
     grade = models.CharField(max_length=5,choices = GRADE_CHOICES,default='')
     Institute = models.CharField(max_length=50,default='')
+    major=models.CharField(max_length=50,default='')
+    
     sum_volun_time = models.IntegerField(default=0)
     bad_record = models.IntegerField(default=0)
 
@@ -86,6 +89,12 @@ class OrderForm(models.Model):
 
     get_address = models.CharField(max_length = 256)
     send_address = models.CharField(max_length = 256)
+
+    get_teacher = models.CharField(max_length = 20)
+    send_teacher = models.CharField(max_length = 20)
+
+    get_teacher_phone = models.CharField(max_length = 20)
+    send_teacher_phone = models.CharField(max_length = 20)
 
     contain = models.CharField(max_length=256,blank=True)
 
