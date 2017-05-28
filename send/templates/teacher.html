@@ -59,7 +59,7 @@
 
     <section id="welcome" class="tm-content-box tm-banner margin-b-10">
         <div align="left" >
-            <a href="{% url "send_index" %}"><img src="url({% static "images/logo_small.png"%})" alt=""/></a>
+            <a href="{% url "send_index" %}"><img src="{% static "images/logo_small.png"%}" alt=""/></a>
     </div>
     </section>
 
@@ -69,6 +69,9 @@
                 <ul class="tm-main-nav-ul">
                     <li class="tm-nav-item"><a href="#welcome" class="tm-nav-item-link tm-button">
                         <i class="fa  tm-nav-fa"></i>我的快递</a>
+                    </li>
+                    <li class="tm-nav-item"><a href="#withoutget" class="tm-nav-item-link tm-button">
+                        <i class="fa  tm-nav-fa2"></i>→未接收订单</a>
                     </li>
                     <li class="tm-nav-item"><a href="#ontheway" class="tm-nav-item-link tm-button">
                         <i class="fa  tm-nav-fa2"></i>→在途订单</a>
@@ -101,36 +104,80 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/welcome.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/welcome.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
                     <fieldset>
+                      <legend>未被接收订单</legend>
+                      {% if form_without_get %}
+                      {% for form in form_without_get %}
+                      <div class="form-row">
+                          <div class="field-label"><label for="field1">订单号</label>:</div>
+                          <br/>
+                          <p class="tm-section-description"><span class="tm-blue-text">{{form.order_number}}</span> <br/>
+                      </div>
+                      <div class="form-row">
+                          <div class="field-label"><label for="field2">接收人</label>:</div>
+                          <br/>
+                          <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text">联系方式：{{form.get_teacher_phone}}</span></p>
+                      </div>
+                      <div class="form-row">
+                          <div class="field-label"><label for="field1">物品</label>:</div>
+                          <br/>
+                          <p class="tm-section-description"><span class="tm-blue-text">{{form.contain}}</span> <br/>
+                      </div>
+                      <div class="form-row">
+                          <div class="field-label"><label for="field1">备注</label>:</div>
+                          <br/>
+                          <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/>
+                      </div>
+                      {% endfor %}
+                      {% else %}
+                      <div class="form-row">
+                        <p class="tm-section-description"><span class="tm-blue-text">您没有未被接收的订单哦。</span></p>
+                      </div>
+                      {% endif %}
+                      <div align="center">
+                          <p class="tm-section-description">===============</p>
+                      </div>
                         <legend>在途订单</legend>
+                        {% if form_on_the_way %}
+                        {% for form in form_on_the_way %}
+                        <div class="form-row">
+                            <div class="field-label"><label for="field1">订单号</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.order_number}}</span> <br/>
+                        </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field1">传出邮件至</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">张XX老师</span> <br/> <span class="tm-red-text">联系方式：43214321</span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text">联系方式：{{form.get_teacher_phone}}</span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field1">志愿者</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">王XX</span> <br/> <span class="tm-red-text">联系方式：87654321</span></p>
-                        </div>
-                        <div align="center">
-                            <p class="tm-section-description">===============</p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_student}}</span> <br/> <span class="tm-red-text">联系方式：{{form.get_student_phone}}</span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">待接收自</label>:</div>
+                            <div class="field-label"><label for="field1">物品</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">王XX老师</span> <br/> <span class="tm-red-text">联系方式：12345678</span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.contain}}</span> <br/>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field1">志愿者</label>:</div>
+                            <div class="field-label"><label for="field1">备注</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">王XX</span> <br/> <span class="tm-red-text">联系方式：87654321</span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/>
                         </div>
-
+                        <div class="form-row">
+                          <a href="{% url 'get_thing' %}" class="btn btn-default">确认已送达</a>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="form-row">
+                          <p class="tm-section-description"><span class="tm-blue-text">您没有正在路上的订单哦。</span></p>
+                        </div>
+                        {% endif %}
 
                     </fieldset>
                     <fieldset>
@@ -138,18 +185,86 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field1">已发出</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">6 单</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">已收到</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">6 单</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form_finished.count}} 单</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                     </fieldset>
                 </div>
 
             </div>
 
+            <div id="withoutget" class="tm-content-box tm-gray-bg tm-services">
+
+                <div class="tm-box-pad tm-services-description-container">
+                    <h2 class="tm-section-title">未接收订单</h2>
+                </div>
+
+                <div class="tm-services-img-container">
+                    <img src="{% static "images/ontheway.png"%}" alt="Green Field" class="img-fluid tm-services-img">
+                </div>
+
+                <div class="tm-box-pad tm-services-description-container">
+                    <fieldset>
+                      {% if form_without_get %}
+                      {% for form in form_without_get %}
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">发送邮件从</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">地址</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_address}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">联系方式</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div align="center">
+                            <p class="tm-section-description">===============</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">发送邮件至</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">地址</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_address}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">联系方式</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field1">物品</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.contain}}</span> <br/>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field1">备注</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field1">订单号</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.order_number}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="form-row">
+                          <p class="tm-section-description"><span class="tm-blue-text">您没有未被接收的订单哦。</span></p>
+                        </div>
+                        {% endif %}
+                    </fieldset>
+
+                </div>
+
+            </div>
             <div id="ontheway" class="tm-content-box tm-gray-bg tm-services">
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -158,24 +273,44 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/ontheway.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/ontheway.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
                 <div class="tm-box-pad tm-services-description-container">
                     <fieldset>
+                      {% if form_on_the_way %}
+                      {% for form in form_on_the_way %}
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">发送邮件从</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">地址</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_address}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">联系方式</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div align="center">
+                            <p class="tm-section-description">===============</p>
+                        </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">发送邮件至</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">张xx老师</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">地址</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">二区 主楼 313</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_address}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">联系方式</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">12345678</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div align="center">
                             <p class="tm-section-description">===============</p>
@@ -183,149 +318,118 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field2">志愿者</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">王xx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_student}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">联系方式</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">87654321</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">接收邮件自</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">张xx老师</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_student_phone}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">地址</label>:</div>
+                            <div class="field-label"><label for="field1">物品</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">二区 主楼 313</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.contain}}</span> <br/>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">联系方式</label>:</div>
+                            <div class="field-label"><label for="field1">备注</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">12345678</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div align="center">
-                            <p class="tm-section-description">===============</p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">志愿者</label>:</div>
+                            <div class="field-label"><label for="field1">订单号</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">王xx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.order_number}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">联系方式</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">87654321</span> <br/> <span class="tm-red-text"></span></p>
+                          <a href="{% url 'get_thing' %}" class="btn btn-default">确认已送达</a>
                         </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="form-row">
+                          <p class="tm-section-description"><span class="tm-blue-text">您没有在路上的订单哦。</span></p>
+                        </div>
+                        {% endif %}
                     </fieldset>
 
                 </div>
 
 
-
-            </div>
-
+              </div>
             <div id="history" class="tm-content-box tm-gray-bg tm-services">
                 <div class="tm-box-pad tm-services-description-container">
                     <h2 class="tm-section-title">历史订单</h2>
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/history.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/history.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
+                  {% if form_finished %}
+                  {% for form in form_finished %}
                     <fieldset>
                         <div class="form-row">
                             <div class="field-label"><label for="field1">订单号</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">0000001</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.order_number}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">发件人</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">甲</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">发件地址</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">一区 活动中心 552</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.send_address}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">收件人</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">乙</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">收件人地址</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">二区 主楼 313</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-
-                    </fieldset>
-                    <fieldset>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field1">订单号</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">0000002</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_address}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">发件人</label>:</div>
+                            <div class="field-label"><label for="field2">物品</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">乙</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.content}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">发件地址</label>:</div>
+                            <div class="field-label"><label for="field2">备注</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">二区 主楼 313 </span><br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">收件人</label>:</div>
+                            <div class="field-label"><label for="field2">发送订单时间</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">甲</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.pub_time}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
-                            <div class="field-label"><label for="field2">收件人地址</label>:</div>
+                            <div class="field-label"><label for="field2">订单接收时间</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">一区 活动中心 552</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.get_order_time}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
-
+                        <div class="form-row">
+                            <div class="field-label"><label for="field2">确认接收订单时间</label>:</div>
+                            <br/>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{form.actual_send_time}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
                     </fieldset>
 
-                    <fieldset>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field1">订单号</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">0000003</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">发件人</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">甲</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">发件地址</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">一区 活动中心 552</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">收件人</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">乙</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-                        <div class="form-row">
-                            <div class="field-label"><label for="field2">收件人地址</label>:</div>
-                            <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">二区 主楼 313</span> <br/> <span class="tm-red-text"></span></p>
-                        </div>
-
-                    </fieldset>
+                    {% endfor %}
+                    {% else %}
+                    <div class="form-row">
+                      <p class="tm-section-description"><span class="tm-blue-text">您没有已完成的订单哦。</span></p>
+                    </div>
+                    {% endif %}
+                  </div>
                 </div>
-
-            </div>
 
             <div id="send" class="tm-content-box tm-gray-bg tm-services">
 
@@ -454,12 +558,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/briefcase.png"%})" alt="Green Field" class="img-fluid tm-services-img">
-                    <div align="center">
-                        <input type="submit"  value="修改资料" />
-                    </div>
-                    <br/>
-                    <br/>
+                    <img src="{% static "images/briefcase.png"%}" alt="Green Field" class="img-fluid tm-services-img">
 
                 </div>
 
@@ -468,22 +567,27 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field1">姓名</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">xxx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.nick_name}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">性别</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">xx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.gender}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">教职工号</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">xxxxxxxxx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.username}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">联系方式</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">xxxxxxxxx</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.phone_number}}</span> <br/> <span class="tm-red-text"></span></p>
+                        </div>
+                        <div class="form-row">
+                          <div align="center">
+                              <a class="btn btn-default"  value="修改资料">修改资料</a>
+                          </div>
                         </div>
                     </fieldset>
                 </div>
@@ -493,7 +597,7 @@
             <div id="protect" class="tm-content-box tm-gray-bg tm-services">
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/medicine.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/medicine.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -503,7 +607,7 @@
 
                 </div>
                 <div align="center">
-                    <input type="submit"  value="设置密保" onclick="{location.href='{% url "email" %}'}" />
+                    <a class="btn btn-default"  value="设置密保" onclick="{location.href='{% url "email" %}'}">设置密保</a>
                 </div>
                 <br/>
                 <br/>
@@ -514,7 +618,7 @@
 
                 <div class="tm-services-img-container">
                     <br/>
-                    <img src="url({% static "images/glove.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/glove.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -528,7 +632,7 @@
                 <br/>
                 <br/>
                 <div align="center">
-                    <input type="submit"  value="修改密码" onclick="{location.href='{% url "set_password" %}'}" />
+                    <a class="btn btn-default"  value="修改密码" onclick="{location.href='{% url "set_password" %}'}">修改密码</a>
                 </div>
                 <br/>
                 <br/>

@@ -59,7 +59,7 @@
 
     <section id="welcome" class="tm-content-box tm-banner margin-b-10">
         <div align="left" >
-            <a href="{% url "send_index" %}"><img src="url({% static 'images/logo_small.png'%})" alt=""/></a>
+            <a href="{% url "send_index" %}"><img src="{% static 'images/logo_small.png'%}" alt=""/></a>
         </div>
     </section>
 
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static 'images/welcome.png'%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static 'images/welcome.png'%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -129,7 +129,7 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field1">共完成</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{ form_finished.count() }} 单</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{ form_finished.count }} 单</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">好评率</label>:</div>
@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/ontheway.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/ontheway.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
                 {% if form_on_the_way %}
                 <div class="tm-box-pad tm-services-description-container">
@@ -222,11 +222,11 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="images/history.png" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% staatic "images/history.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
-                  {% if form_finished.counter>0%}
+                  {% if form_finished %}
                   {% for form in form_finished %}
                     <fieldset>
                         <div class="form-row">
@@ -273,7 +273,7 @@
                     <form rol="form" method="POST">
                         <div class="left-agileinfo">
                             <div class="tm-services-img-container">
-                                <img src="url({% static "images/paper-plane.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                                <img src="{% static "images/paper-plane.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                             </div>
                         </div>
                         <div class="right-agileits-w3layouts">
@@ -347,7 +347,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="url({% static "images/backpack.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/backpack.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                     <fieldset>
                         <div class="form-row">
                             <div class="field-label"><label for="field1">累计志愿时长</label>:</div>
@@ -356,7 +356,7 @@
                         </div>
                     </fieldset>
                     <div align="center">
-                        <a class="btn btn-default"  value="修改资料"></a>
+                        <a class="btn btn-default"  value="修改资料">修改资料</a>
                     </div>
                 <br/>
                     <br/>
@@ -368,22 +368,22 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field1">姓名</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{user.users.nick_name}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.nick_name}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">性别</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{user.users.gender}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.gender}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">院系</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{user.users.Institute}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.Institute}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">专业</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{user.users.major}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.major}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                         <div class="form-row">
                             <div class="field-label"><label for="field2">学号</label>:</div>
@@ -393,7 +393,7 @@
                         <div class="form-row">
                             <div class="field-label"><label for="field2">联系方式</label>:</div>
                             <br/>
-                            <p class="tm-section-description"><span class="tm-blue-text">{{user.users.phone_number}}</span> <br/> <span class="tm-red-text"></span></p>
+                            <p class="tm-section-description"><span class="tm-blue-text">{{user.phone_number}}</span> <br/> <span class="tm-red-text"></span></p>
                         </div>
                     </fieldset>
                 </div>
@@ -403,7 +403,7 @@
             <div id="protect" class="tm-content-box tm-gray-bg tm-services">
 
                 <div class="tm-services-img-container">
-                    <img src="url({%static "images/medicine.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{%static "images/medicine.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -424,7 +424,7 @@
 
                 <div class="tm-services-img-container">
                     <br/>
-                    <img src="url({% static "images/glove.png"%})" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/glove.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">

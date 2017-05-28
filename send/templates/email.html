@@ -2,10 +2,10 @@
 {% load staticfiles %}
 {% block title %}修改邮箱{% endblock %}
 {% block righttoplink %}
-                            <li class="btn-cta"><a href="index_login.html"><span>登录</span></a></li>
-{% block righttoplink %}
+                            <li class="btn-cta"><a href="{% url 'send_index'%}"><span>返回</span></a></li>
+{% endblock %}
 {% block content %}
-        <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4_1.jpg)" >
+        <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_1.jpg"%})" >
             <div class="overlay"></div>
             <div class="gtco-container">
                 <div class="row">
@@ -17,17 +17,27 @@
                                 <div align="center" >
                                     <img src="{% static "images/logo_small.png" %}" alt=""/>
                                 </div>
+                                {% if state == 'success' %}
+                                <div>
+                                  <h2 class="text-center" style="color:yellow">修改密保成功</h2>
+                                </div>
+                                {% elif state == 'password_error' %}
+                                <div>
+                                  <h2 class="text-center" style="color:red">密码错误</h2>
+                                </div>
+                                {% elif state == 'email_error' %}
+                                <div>
+                                  <h2 class="text-center" style="color:red">邮箱错误</h2>
+                                </div>
+                                {% endif %}
                                 <form method="POST" role="form">
-                                    <select>
-                                        <option value ="teacher">教师账号</option>
-                                        <option value ="student">学生账号</option>
-                                    </select>
-                                    <p>账号</p>
-                                    <input type="text" class="text" required name='username' value="仅英文和数字" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" >
-                                    <p>密码</p>
+                                  {% csrf_token %}
+                                    <p>请输入密码</p>
                                     <input type="password" required name='password' value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-                                    <p>邮箱</p>
-                                    <input type="text" class="text" required name='email' value="用于忘记密码的验证" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
+                                    <p>旧邮箱</p>
+                                    <input type="text" class="text" required name='email1' value="用于忘记密码的验证" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
+                                    <p>新邮箱</p>
+                                    <input type="text" class="text" required name='email2' value="直接修改邮箱，请谨慎输入" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'EMAIL';}" >
 
                                     <div class="submit" align="center">
                                         <input type="submit" onclick="myFunction()" value="修改邮箱" >

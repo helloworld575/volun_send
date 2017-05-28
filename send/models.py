@@ -33,38 +33,21 @@ class Users(models.Model):
     user = models.OneToOneField(User)
     user_type= models.IntegerField(default=0)
     phone_number = models.CharField(max_length=20)
-    nick_name=models.CharField(max_length=20)
-
-    GENDER_CHOICES = (
-        ('女','Male'),
-        ('男','Female'),
-    )
-    GRADE_CHOICES = (
-        ('16','大一'),
-        ('15','大二'),
-        ('14','大三'),
-        ('13','大四'),
-        ('硕士','硕士'),
-        ('博士', '博士'),
-    )
+    nick_name=models.CharField(max_length=20,default='')
+    
     pass_question1=models.CharField(max_length=100,default='')
     pass_answer1=models.CharField(max_length=50,default='')
     pass_question2=models.CharField(max_length=100,default='')
     pass_answer2=models.CharField(max_length=50,default='')
-    gender = models.CharField(max_length=2,choices=GENDER_CHOICES,default='')
-    grade = models.CharField(max_length=5,choices = GRADE_CHOICES,default='')
+
+    gender = models.CharField(max_length=2,default='')
+    grade = models.CharField(max_length=5,default='')
     Institute = models.CharField(max_length=50,default='')
     major=models.CharField(max_length=50,default='')
-    
+
     sum_volun_time = models.IntegerField(default=0)
     bad_record = models.IntegerField(default=0)
 
-    SENDORGET = (
-        ('send','send'),
-        ('get','get'),
-    )
-    send_or_get = models.CharField(max_length=5,choices = SENDORGET)
-    address = models.EmailField(max_length=256)
     sum_order_num = models.IntegerField(default=0)
 
     def __str__(self):
@@ -74,17 +57,7 @@ class Users(models.Model):
 class OrderForm(models.Model):
     first_order = -1
 
-    SLOWORFAST = (
-        ('0','slow'),
-        ('1','fast'),
-    )
-
-    ORDERCASE = (
-        ('0','without_get'),
-        ('1','on_the_way'),
-        ('2','has_send'),
-    )
-    users_using = models.ManyToManyField(Users)
+    stu_and_tea = models.OneToOneField(Users)       #the one who publish it
     # get_people = models.ForeignKey(TeacherUser)
 
     get_address = models.CharField(max_length = 256)
@@ -95,6 +68,9 @@ class OrderForm(models.Model):
 
     get_teacher_phone = models.CharField(max_length = 20)
     send_teacher_phone = models.CharField(max_length = 20)
+
+    get_student=models.CharField(max_length=20)
+    get_student_phone=models.CharField(max_length=20)
 
     contain = models.CharField(max_length=256,blank=True)
 
@@ -108,11 +84,11 @@ class OrderForm(models.Model):
     actual_send_time = models.DateTimeField()
     pub_time = models.DateTimeField(auto_now=True)
 
-    slow_or_fast = models.CharField(max_length=5,choices=SLOWORFAST)
+    slow_or_fast = models.CharField(max_length=5)
 
     other_import = models.TextField()
 
-    order_case = models.CharField(max_length=20,choices = ORDERCASE)     # 1-order without get 2-order on the way 2 order has sent
+    order_case = models.CharField(max_length=2)     # 1-order without get 2-order on the way 2 order has sent
     # order_without_get = models.ForeignKey(TeacherUser)
     # order_on_the_way = models.ForeignKey(TeacherUser)
     # order_has_get = models.ForeignKey(TeacherUser)

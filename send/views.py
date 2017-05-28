@@ -118,6 +118,7 @@ def sign_up(request):
                 new_my_user = Users(user=new_user,user_type=user_type)
                 new_my_user.save()
                 state = 'success'
+                return HttpResponseRedirect(reverse('send_index'))
     content = {
         'state': state,
     }
@@ -133,20 +134,56 @@ def log_out(request):
 def stu_get_form(request):
     return render(request,"index_student.html")
 def tea_set_form(request):
+    #without handle the form
+    user=request.user.users
+    form_without_get=OrderForm.objects.filter(stu_and_tea=user,order_case='0')
+    form_on_the_way=OrderForm.objects.filter(stu_and_tea=user,order_case='1')
+    form_finished=OrderForm.objects.filter(stu_and_tea=user,order_case='2')
+    content={
+        "user":user,
+        "form_without_get":form_without_get,
+        "form_on_the_way":form_on_the_way,
+        "form_finished":form_finished,
+    }
+    return render(request,"teacher.html",content)
 
-    return render(request,"index_teacher.html")
+
 def stu_get_detail(request):
-    user=request.user
-    form_on_the_way=user.OrderForm.filter(order_case='1')
-    form_finished=user.OrderForm.filter(order_case='2')
+    #without handle the form
+    user=request.user.users
+    form_on_the_way=OrderForm.objects.get(stu_and_tea=user,order_case='1')
+    form_finished=OrderForm.objects.filter(stu_and_tea=user,order_case='2')
     content={
         'user':user,
         'form_on_the_way':form_on_the_way,
         'form_finished':form_finished,
     }
     return render(request,"student.html",content)
-    
+
 def teacher_get_detail(request):
     return render(request,"teacher.html")
 def email(request):
-    return render(request,"email.html")
+    state=''
+    user=request.user
+    if not request.user.is_authenticated():
+        state="please login first"
+
+    if request.method == 'POST':
+        password = request.POST.get('password', '')
+        email1 = request.POST.get('email1', '')
+        email2 = request.POST.get('email2', '')
+        if user.check_password(password):
+            if user.email==email1:
+                user.email=email2
+                user.save()
+                state = 'success'
+                return HttpResponseRedirect(reverse('send_index'))
+            else:
+                state='email_error'
+        else:
+            state = 'password_error'
+    content = {
+        'user': user,
+        'state': state,
+    }
+    return render(request,"email.html",content)
