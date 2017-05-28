@@ -134,6 +134,22 @@ def log_out(request):
 def stu_get_form(request):
     return render(request,"index_student.html")
 def tea_set_form(request):
+    return render(request,"index_teacher.html")
+
+
+def stu_get_detail(request):
+    #without handle the form
+    user=request.user.users
+    form_on_the_way=None if not OrderForm.objects.filter(stu_and_tea=user,order_case='1') else OrderForm.objects.get(stu_and_tea=user,order_case='1')
+    form_finished=OrderForm.objects.filter(stu_and_tea=user,order_case='2')
+    content={
+        'user':user,
+        'form_on_the_way':form_on_the_way,
+        'form_finished':form_finished,
+    }
+    return render(request,"student.html",content)
+
+def teacher_get_detail(request):
     #without handle the form
     user=request.user.users
     form_without_get=OrderForm.objects.filter(stu_and_tea=user,order_case='0')
@@ -146,22 +162,6 @@ def tea_set_form(request):
         "form_finished":form_finished,
     }
     return render(request,"teacher.html",content)
-
-
-def stu_get_detail(request):
-    #without handle the form
-    user=request.user.users
-    form_on_the_way=OrderForm.objects.get(stu_and_tea=user,order_case='1')
-    form_finished=OrderForm.objects.filter(stu_and_tea=user,order_case='2')
-    content={
-        'user':user,
-        'form_on_the_way':form_on_the_way,
-        'form_finished':form_finished,
-    }
-    return render(request,"student.html",content)
-
-def teacher_get_detail(request):
-    return render(request,"teacher.html")
 def email(request):
     state=''
     user=request.user

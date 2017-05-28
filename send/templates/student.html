@@ -222,7 +222,7 @@
                 </div>
 
                 <div class="tm-services-img-container">
-                    <img src="{% staatic "images/history.png"%}" alt="Green Field" class="img-fluid tm-services-img">
+                    <img src="{% static "images/history.png"%}" alt="Green Field" class="img-fluid tm-services-img">
                 </div>
 
                 <div class="tm-box-pad tm-services-description-container">
@@ -413,7 +413,7 @@
 
                 </div>
             <div align="center">
-                <input type="submit"  value="设置密保" onclick="{location.href='{% url 'email'}" />
+                <a class="btn btn-default"  value="设置密保" onclick="{location.href='{% url "email"%}'}">设置密保</a>
             </div>
                 <br/>
                 <br/>
@@ -438,7 +438,7 @@
                 <br/>
                 <br/>
                 <div align="center">
-                    <input type="submit"  value="修改密码" onclick="{location.href='{% url "set_password" %}'}" />
+                    <a class="btn btn-default"  value="修改密码" onclick="{location.href='{% url "set_password" %}'}" >修改密码</a>
                 </div>
                 <br/>
                 <br/>

@@ -38,7 +38,7 @@
         <li class="has-dropdown">
             <a href="#">个人中心</a>
             <ul class="dropdown">
-                <li><a href="#">个人资料</a></li>
+                <li><a href="{% url 'teacher' %}">个人资料</a></li>
                 <li><a href="{% url 'log_out' %}">退出登录</a></li>
                 <!--li><a href="#">Branding</a></li>
                 <li><a href="#">API</a></li-->
@@ -63,7 +63,7 @@
                                     <button class="close"><a href="" onclick="closeBg();">&nbsp;X&nbsp;</a></button>
                                     <div class="donate_form_w3l">
 
-                                        <form action="#" method="post">
+                                        <form rol="form" method="POST">
                                             <div class="left-agileinfo">
                                                 <br/>
                                                 <fieldset>
@@ -72,55 +72,55 @@
                                                         <div class="field-widget">
                                                             <select id="field1" name="field1" class="validate-selection" title="Choose your department">
                                                                 <option>请选择</option>
-                                                                <option>立即下单</option>
-                                                                <option>预约下单</option>
+                                                                <option value='1'>立即下单</option>
+                                                                <option value='2'>预约下单</option>
                                                             </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field2">寄件人</label>:</div>
-                                                        <div class="field-widget"><input name="field2" id="field2" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="send_teacher" id="field2" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field3">手机电话</label>:</div>
-                                                        <div class="field-widget"><input name="field3" id="field3" class="required " title="请输入常用号码" /></div>
+                                                        <div class="field-widget"><input name="send_teacher_phone" id="field3" class="required " title="请输入常用号码" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field4">取件地址</label>:</div>
                                                         <div class="field-widget">
-                                                            <select id="field4" name="field4" class="validate-selection" title="Choose your department">
-                                                                <option>请选择</option>
-                                                                <option>一区</option>
-                                                                <option>二区</option>
-                                                                <option>三区</option>
-                                                                <option>科学园</option>
+                                                            <select id="field4" name="send_big_location" class="validate-selection" title="Choose your department">
+                                                                <option value='0'>请选择</option>
+                                                                <option value='1'>一区</option>
+                                                                <option value='2'>二区</option>
+                                                                <option value='3'>三区</option>
+                                                                <option value='4'>科学园</option>
                                                             </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field5">详细地址</label>:</div>
-                                                        <div class="field-widget"><input name="field5" id="field5" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="tetail_location" id="field5" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field6">最晚取件时间</label>:</div>
                                                         <div class="field-widget">
-                                                            <select id="field6" name="field6" class="validate-selection" title="Choose your department">
-                                                                <option>请选择</option>
-                                                                <option>8:00</option>
-                                                                <option>9:00</option>
-                                                                <option>10:00</option>
-                                                                <option>11:00</option>
-                                                                <option>11:30</option>
-                                                                <option>13:30</option>
-                                                                <option>14:00</option>
-                                                                <option>15:00</option>
-                                                                <option>16:00</option>
-                                                                <option>17:00</option>
+                                                            <select id="field6" name="time" class="validate-selection" title="Choose your department">
+                                                                <option value='0'>请选择</option>
+                                                                <option value='1'>8:00</option>
+                                                                <option value='2'>9:00</option>
+                                                                <option value='3'>10:00</option>
+                                                                <option value='4'>11:00</option>
+                                                                <option value='5'>11:30</option>
+                                                                <option value="6">13:30</option>
+                                                                <option value="7">14:00</option>
+                                                                <option value="8">15:00</option>
+                                                                <option value="9">16:00</option>
+                                                                <option value="10">17:00</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -130,40 +130,40 @@
                                                 <fieldset>
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field7">收件人</label>:</div>
-                                                        <div class="field-widget"><input name="field7" id="field7" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="get_teacher" id="field7" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field8">收件人电话</label>:</div>
-                                                        <div class="field-widget"><input name="field8" id="field8" class="required " title="请输入常用号码" /></div>
+                                                        <div class="field-widget"><input name="get_teacher_phone" id="field8" class="required " title="请输入常用号码" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field9">取件地址</label>:</div>
                                                         <div class="field-widget">
-                                                            <select id="field9" name="field9" class="validate-selection" title="Choose your department">
-                                                                <option>请选择</option>
-                                                                <option>一区</option>
-                                                                <option>二区</option>
-                                                                <option>三区</option>
-                                                                <option>科学园</option>
+                                                            <select id="field9" name="get_big_location" class="validate-selection" title="Choose your department">
+                                                                <option value="0">请选择</option>
+                                                                <option value="1">一区</option>
+                                                                <option value='2'>二区</option>
+                                                                <option value="3">三区</option>
+                                                                <option value="4">科学园</option>
                                                             </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field10">详细地址</label>:</div>
-                                                        <div class="field-widget"><input name="field10" id="field10" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="get_detail_location" id="field10" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field11">邮件内容</label>:</div>
-                                                        <div class="field-widget"><input name="field11" id="field11" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="contain" id="field11" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field12">备注</label>:</div>
-                                                        <div class="field-widget"><input name="field12" id="field12" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="other_import" id="field12" class="required" title="请输入" /></div>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -172,14 +172,7 @@
                                             </div>
 
                                         </form>
-
-
-
-
-
                                     </div>
-
-
                                 </div>
 
                                 </div>
