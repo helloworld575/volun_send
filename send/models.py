@@ -34,7 +34,7 @@ class Users(models.Model):
     user_type= models.IntegerField(default=0)
     phone_number = models.CharField(max_length=20)
     nick_name=models.CharField(max_length=20,default='')
-    
+
     pass_question1=models.CharField(max_length=100,default='')
     pass_answer1=models.CharField(max_length=50,default='')
     pass_question2=models.CharField(max_length=100,default='')
@@ -74,14 +74,18 @@ class OrderForm(models.Model):
 
     contain = models.CharField(max_length=256,blank=True)
 
-    order_number=models.CharField(max_length=15)       #YYYYMMDDIIIIIRR
+    order_number=models.CharField(max_length=15,default='')       #YYYYMMDDIIIIIRR
 
-    volunteer_time = models.IntegerField(default =0)
+    volunteer_time = models.CharField(max_length=5,default='0')
 
-    latest_get_time = models.DateTimeField()
-    get_order_time = models.DateTimeField()
-    latest_send_time = models.DateTimeField()
-    actual_send_time = models.DateTimeField()
+    '''time:
+        1-10
+        8:00-17:00'''
+    latest_get_time = models.IntegerField(default=0)
+    get_order_time = models.IntegerField(default=0)
+    latest_send_time = models.IntegerField(default=0)
+    actual_send_time = models.IntegerField(default=0)
+
     pub_time = models.DateTimeField(auto_now=True)
 
     slow_or_fast = models.CharField(max_length=5)

@@ -54,6 +54,7 @@
                                     <div class="donate_form_w3l">
 
                                         <form rol="form" method="POST">
+                                          {% csrf_token %}
                                             <div class="left-agileinfo">
                                                 <div class="tm-services-img-container">
                                                     <img src="{% static 'images/paper-plane.png' %}" alt="Green Field" class="img-fluid tm-services-img">
@@ -66,7 +67,6 @@
                                                         <div class="field-label"><label for="field1">下单方式</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field1" name="get_method" class="validate-selection" title="Choose your department">
-                                                                <option value='0'>请选择</option>
                                                                 <option value="1">立即送件</option>
                                                                 <option value="2">预约送件</option>
                                                             </select>
@@ -77,7 +77,6 @@
                                                         <div class="field-label"><label for="field2">取件地点</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field2" name="get_address" class="validate-selection" title="Choose your department">
-                                                                <option value="0">请选择</option>
                                                                 <option value="1">一区</option>
                                                                 <option value="2">二区</option>
                                                                 <option value="3">三区</option>
@@ -90,7 +89,6 @@
                                                         <div class="field-label"><label for="field3">送件地点</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field3" name="send_address" class="validate-selection" title="Choose your department">
-                                                                <option value="0">请选择</option>
                                                                 <option value="1">一区</option>
                                                                 <option value="2">二区</option>
                                                                 <option value="3">三区</option>
@@ -100,7 +98,7 @@
                                                     </div>
 
                                                     <div class="form-row">
-                                                        <div class="field-label"><label for="field6">送件时间</label>:</div>
+                                                        <div class="field-label"><label for="field6">送件时间(如立即送件请忽略)</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field6" name="time" class="validate-selection" title="Choose your department">
                                                                 <option value='0'>请选择</option>

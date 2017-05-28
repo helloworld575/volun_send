@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.core.paginator import EmptyPage,Paginator,PageNotAnInteger
 from django.core.urlresolvers import reverse
-from .utils import teacher_check,student_check
+from .utils import get_volun_time
 
 def index(request):
     if request.user.is_authenticated():
@@ -132,10 +132,58 @@ def log_out(request):
 
 
 def stu_get_form(request):
+    if request.method=="POST":
+        user=request.user.users
+        send_type=request.POST.get('get_method','')
+        get_address=request.POST.get('get_address','')
+        send_address=request.POST.get('send_address','')
+        if send_type=='1':
+            order_form=OrderForm.objects.filter(order_case='0',
+                get_address=send_address,send_address=get_address)#without finished
+        elif send_type=='2':
+            pass
     return render(request,"index_student.html")
+
+
 def tea_set_form(request):
+    if request.method=="POST":
+        #need try here
+        user=request.user.users
+        send_type=request.POST.get('field1','')
+        send_teacher=request.POST.get('send_teacher','')
+        send_teacher_phone=request.POST.get('send_teacher_phone','')
+        get_teacher=request.POST.get('get_teacher','')
+        get_teacher_phone=request.POST.get('get_teacher_phone','')
+        get_address=request.POST.get('send_big_location','')+' '+request.POST.get('detail_location')
+        send_address=request.POST.get('get_big_location','')+' '+request.POST.get('get_detail_location')
+        latest_get_time=int(request.POST.get('time',''))
+        other_import=request.POST.get('other_import','')
+        contain=request.POST.get('contain')
+        volun_time=get_volun_time(request.POST.get('send_big_location',''),request.POST.get('get_big_location',''))
+        new_form=OrderForm(
+            stu_and_tea=user,
+            slow_or_fast=send_type,
+            send_teacher=send_teacher,
+            send_teacher_phone=send_teacher_phone,
+            send_address=send_address,
+            get_teacher=get_teacher,
+            get_teacher_phone=get_teacher_phone,
+            get_address=get_address,
+            latest_get_time=latest_get_time,
+            other_import=other_import,
+            contain=contain,
+            volunteer_time=volun_time,
+            order_case='0',
+        )
+        new_form.order_number=new_form.gen_order_num()
+        new_form.save()
+        return HttpResponseRedirect(reverse('tea_order_back'))
     return render(request,"index_teacher.html")
 
+def tea_order_back(request):
+    return render(request,"tea_order_back.html")
+def stu_order_back(request):
+    return render(request,"stu_order_back.html")
 
 def stu_get_detail(request):
     #without handle the form

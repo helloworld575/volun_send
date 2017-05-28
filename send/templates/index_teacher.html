@@ -64,6 +64,7 @@
                                     <div class="donate_form_w3l">
 
                                         <form rol="form" method="POST">
+                                          {% csrf_token %}
                                             <div class="left-agileinfo">
                                                 <br/>
                                                 <fieldset>
@@ -92,7 +93,6 @@
                                                         <div class="field-label"><label for="field4">取件地址</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field4" name="send_big_location" class="validate-selection" title="Choose your department">
-                                                                <option value='0'>请选择</option>
                                                                 <option value='1'>一区</option>
                                                                 <option value='2'>二区</option>
                                                                 <option value='3'>三区</option>
@@ -103,20 +103,19 @@
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field5">详细地址</label>:</div>
-                                                        <div class="field-widget"><input name="tetail_location" id="field5" class="required" title="请输入" /></div>
+                                                        <div class="field-widget"><input name="detail_location" id="field5" class="required" title="请输入" /></div>
                                                     </div>
 
                                                     <div class="form-row">
                                                         <div class="field-label"><label for="field6">最晚取件时间</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field6" name="time" class="validate-selection" title="Choose your department">
-                                                                <option value='0'>请选择</option>
                                                                 <option value='1'>8:00</option>
                                                                 <option value='2'>9:00</option>
                                                                 <option value='3'>10:00</option>
                                                                 <option value='4'>11:00</option>
-                                                                <option value='5'>11:30</option>
-                                                                <option value="6">13:30</option>
+                                                                <option value='5'>12:00</option>
+                                                                <option value="6">13:00</option>
                                                                 <option value="7">14:00</option>
                                                                 <option value="8">15:00</option>
                                                                 <option value="9">16:00</option>
@@ -142,7 +141,6 @@
                                                         <div class="field-label"><label for="field9">取件地址</label>:</div>
                                                         <div class="field-widget">
                                                             <select id="field9" name="get_big_location" class="validate-selection" title="Choose your department">
-                                                                <option value="0">请选择</option>
                                                                 <option value="1">一区</option>
                                                                 <option value='2'>二区</option>
                                                                 <option value="3">三区</option>
