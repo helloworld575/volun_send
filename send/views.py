@@ -202,8 +202,7 @@ def tea_set_form(request):
             order_case='0',
             pub_time=datetime.datetime.now()
         )
-        new_form.save()
-        new_form.order_number=new_form.gen_order_num(new_form)
+        new_form.order_number=OrderForm.gen_order_num(new_form)
         new_form.save()
         return render(request,"tea_order_back.html",{'form':new_form})
     return render(request,"index_teacher.html")

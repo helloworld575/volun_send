@@ -55,9 +55,9 @@ class Users(models.Model):
 
 
 class OrderForm(models.Model):
-    first_order = -1
+    first_order = models.IntegerField(default=-1)
 
-    stu_and_tea = models.OneToOneField(Users)       #the one who publish it
+    stu_and_tea = models.ForeignKey(Users)       #the one who publish it
     # get_people = models.ForeignKey(TeacherUser)
 
     get_address = models.CharField(max_length = 256)
@@ -74,19 +74,19 @@ class OrderForm(models.Model):
 
     contain = models.CharField(max_length=256,blank=True)
 
-    order_number=models.CharField(max_length=15,default='')       #YYYYMMDDIIIIIRR
+    order_number=models.CharField(max_length=15,default='')       #YYYYMMDDIIIII
 
     volunteer_time = models.CharField(max_length=5,default='0')
 
     '''time:
         1-10
         8:00-17:00'''
-    latest_get_time = models.DateTimeField(blank=True)
-    get_order_time = models.DateTimeField(blank=True)
-    latest_send_time = models.DateTimeField(blank=True)
-    actual_send_time = models.DateTimeField(blank=True)
+    latest_get_time = models.DateTimeField(null=True)
+    get_order_time = models.DateTimeField(null=True)
+    latest_send_time = models.DateTimeField(null=True)
+    actual_send_time = models.DateTimeField(null=True)
 
-    pub_time = models.DateTimeField(blank=True)
+    pub_time = models.DateTimeField(null=True)
 
     slow_or_fast = models.CharField(max_length=5)
 
@@ -103,15 +103,11 @@ class OrderForm(models.Model):
     def __str__(self):
         return self.order_number
     def get_first_order(self):
-        if self.first_order < 0:
-            self.first_order = OrderForm.objects.order_by('-order_number')[0].first_order+1
-        else:
-            self.first_order +=1
-
+        self.first_order = OrderForm.objects.order_by('-order_number')[0].first_order+1
         return self.first_order
 
     @classmethod
     def gen_order_num(cls,self):
         number = str(cls.get_first_order(self))
         n = 5-len(number)
-        return str(cls.pub_time.year())+str(cls.pub_time.month())+str(cls.pub_time.day())+'0'*n+number+str(random(10,99))
+        return str(self.pub_time.year)+str(self.pub_time.month)+str(self.pub_time.day)+'0'*n+number
