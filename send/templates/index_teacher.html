@@ -63,7 +63,7 @@
                                     <button class="close"><a href="" onclick="closeBg();">&nbsp;X&nbsp;</a></button>
                                     <div class="donate_form_w3l">
 
-                                        <form rol="form" method="POST">
+                                        <form rol="form" method="POST" action="{% url 'tea_set_form'%}">
                                           {% csrf_token %}
                                             <div class="left-agileinfo">
                                                 <br/>

@@ -81,18 +81,18 @@ class OrderForm(models.Model):
     '''time:
         1-10
         8:00-17:00'''
-    latest_get_time = models.IntegerField(default=0)
-    get_order_time = models.IntegerField(default=0)
-    latest_send_time = models.IntegerField(default=0)
-    actual_send_time = models.IntegerField(default=0)
+    latest_get_time = models.DateTimeField(blank=True)
+    get_order_time = models.DateTimeField(blank=True)
+    latest_send_time = models.DateTimeField(blank=True)
+    actual_send_time = models.DateTimeField(blank=True)
 
-    pub_time = models.DateTimeField(auto_now=True)
+    pub_time = models.DateTimeField(blank=True)
 
     slow_or_fast = models.CharField(max_length=5)
 
-    other_import = models.TextField()
+    other_import = models.TextField(blank=True)
 
-    order_case = models.CharField(max_length=2)     # 1-order without get 2-order on the way 2 order has sent
+    order_case = models.CharField(max_length=2,blank=True)     # 1-order without get 2-order on the way 2 order has sent
     # order_without_get = models.ForeignKey(TeacherUser)
     # order_on_the_way = models.ForeignKey(TeacherUser)
     # order_has_get = models.ForeignKey(TeacherUser)
@@ -111,7 +111,7 @@ class OrderForm(models.Model):
         return self.first_order
 
     @classmethod
-    def gen_order_num(self):
-        num = str(self.get_first_order())
-        n = 5-len(num)
-        return self.pub_time.year()+self.pub_time.month()+self.pub_time.day()+'0'*n+num+str(random(10,99))
+    def gen_order_num(cls,self):
+        number = str(cls.get_first_order(self))
+        n = 5-len(number)
+        return str(cls.pub_time.year())+str(cls.pub_time.month())+str(cls.pub_time.day())+'0'*n+number+str(random(10,99))
