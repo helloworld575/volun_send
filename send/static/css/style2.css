@@ -63,34 +63,70 @@ body{
 	-khtml-opacity:0;
 }
 #dialog2 {
-	background-color:#fff;
-	border:5px solid rgba(0,0,0,0);
-	height:300px;
-	left:50%;
-	margin:-150px 0 0 -475px;
-	padding:1px;
-	position:fixed !important; /* 浮动对话框 */
-	position:absolute;
-	top:50%;
-	width:250px;
-	z-index:5;
-	border-radius:5px;
-	display:none;
-}
-#dialog {
+	float:left;
+	#float:none;
+	_float:none;
+	[float:none;
+	]float:none;
 	background-color:#fff;
 	border:5px solid rgba(0,0,0,0);
 	height:525px;
-	left:50%;
-	margin:-275px 0 0 -475px;
+	right:100% !important;
+	margin:-175px 50px 0 0 !important;
 	padding:1px;
-	position:fixed !important; /* 浮动对话框 */
 	position:absolute;
 	top:50%;
 	width:725px;
 	z-index:5;
 	border-radius:5px;
 	display:none;
+}
+/*#dialog {
+	background-color:#fff;
+	border:5px solid rgba(0,0,0,0);
+	height:525px;
+	left:10% ;*/
+	/*right:100% !important;*/
+	/*
+	margin:-175px 0 0 0 ;
+	padding:1px;
+	position:fixed !important; */
+	 /* 浮动对话框 */
+	/*
+	position:absolute;
+	top:50%;
+	width:725px;
+	z-index:5;
+	border-radius:5px;
+	display:none;
+}
+*/
+#dialog{
+	float:left;
+	#float:none;
+	_float:none;
+	[float:none;
+	]float:none;
+	background-color:#fff;
+	border:5px solid rgba(0,0,0,0);
+	height:525px;
+	right:100% !important;
+	margin:-175px 50px 0 0 !important;
+	padding:1px;
+	position:absolute;
+	top:50%;
+	width:725px;
+	z-index:5;
+	border-radius:5px;
+	display:none;
+}
+
+.dialog{
+
+	background-color:#fff;
+	border:5px solid rgba(0,0,0,0);
+	border-radius:5px;
+
 }
 #dialog p {
 	margin:0 0 12px;
