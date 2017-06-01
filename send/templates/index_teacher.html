@@ -33,17 +33,17 @@
 {% endblock %}
 
 {% block righttoplink %}
-        <li><a href="#">微快递服务说明</a></li>
-        <!--li><a href="#">Tour</a></li-->
-        <li class="has-dropdown">
-            <a href="#">个人中心</a>
-            <ul class="dropdown">
-                <li><a href="{% url 'teacher' %}">个人资料</a></li>
-                <li><a href="{% url 'log_out' %}">退出登录</a></li>
-                <!--li><a href="#">Branding</a></li>
-                <li><a href="#">API</a></li-->
-            </ul>
-        </li>
+<li><a href="{% url "illustration"%}">Shared Route服务说明</a></li>
+<!--li><a href="#">Tour</a></li-->
+<li class="has-dropdown">
+    <a href="{% url "detail_teacher"%}">个人中心</a>
+    <ul class="dropdown">
+        <li><a href="{% url "detail_teacher"%}">个人资料</a></li>
+        <li><a href="{% url "log_out"%}">退出登录</a></li>
+        <!--li><a href="#">Branding</a></li>
+        <li><a href="#">API</a></li-->
+    </ul>
+</li>
 {% endblock %}
 {% block content %}
         <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_3.jpg" %})" >

@@ -257,3 +257,13 @@ def email(request):
         'state': state,
     }
     return render(request,"email.html",content)
+def illustration(request):
+    return render(request,"illustration.html")
+def detail_student(request):
+    return render(request,"detail_student.html")
+def modify_student(request):
+    return render(request,"modify_student.html")
+def detail_teacher(request):
+    return render(request,"detail_teacher.html")
+def modify_teacher(request):
+    return render(request,"modify_teacher.html")
