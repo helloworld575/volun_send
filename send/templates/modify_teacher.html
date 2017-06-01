@@ -30,7 +30,8 @@
                         <div class="tm-section-title" align="center">
                             修改个人资料
                         </div>
-
+                        <form rol="form" method="post">
+                          {% csrf_token %}
                         <div class="left-agileinfo">
                             <div align="center">
                                 <img src="{% static "images/briefcase.png"%}">
@@ -45,25 +46,24 @@
                             <fieldset>
                                 <div class="form-row">
                                     <div class="field-label"><label for="field1">姓名</label>:</div>
-                                    <div class="field-widget"><input name="field1" id="field1" class="required" value="原值" /></div>
+                                    <div class="field-widget"><input name="nick_name" id="field1" class="required" value="{{user.nick_name}}" /></div>
                                 </div>
                                 <div class="form-row">
                                     <div class="field-label"><label for="field2">性别</label>:</div>
                                     <div class="field-widget">
-                                        <select id="field2" name="field2" class="validate-selection" title="Choose your department">
-                                            <option>请选择</option>
-                                            <option>女</option>
-                                            <option>男</option>
+                                        <select id="field2" name="gender" class="validate-selection" title="Choose your department">
+                                            <option value="1">女</option>
+                                            <option value="2">男</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="field-label"><label for="field3">教职工号</label>:</div>
-                                    <div class="field-widget"><input name="field3" id="field3" class="required" value="原值" /></div>
+                                    <div class="field-widget"><input name="username" id="field3" class="required" value="{{user.username}}" /></div>
                                 </div>
                                 <div class="form-row">
                                     <div class="field-label"><label for="field4">联系方式</label>:</div>
-                                    <div class="field-widget"><input name="field4" id="field4" class="required" value="原值" /></div>
+                                    <div class="field-widget"><input name="phone_number" id="field4" class="required" value="{{user.phone_number}}" /></div>
                                 </div>
                             </fieldset>
                             <!--
@@ -72,7 +72,7 @@
                             </div>
                             -->
                         </div>
-
+                        </form>
 
 
 

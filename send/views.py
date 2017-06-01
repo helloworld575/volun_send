@@ -260,10 +260,30 @@ def email(request):
 def illustration(request):
     return render(request,"illustration.html")
 def detail_student(request):
-    return render(request,"detail_student.html")
+    user=request.user.users
+    return render(request,"detail_student.html",{"user":user})
 def modify_student(request):
-    return render(request,"modify_student.html")
+    user=request.user.users
+    if request.method=="POST":
+        user.nick_name=request.POST.get("nick_name",'')
+        user.gender=request.POST.get("gender",'')
+        user.Institute=request.POST.get("institute",'')
+        user.major=request.POST.get("major",'')
+        user.username=request.POST.get("username",'')
+        user.phone_number=request.POST.get("phone_number",'')
+        user.save()
+        return HttpResponseRedirect(reverse("detail_student"))
+    return render(request,"modify_student.html",{"user":user})
 def detail_teacher(request):
-    return render(request,"detail_teacher.html")
+    user=request.user.users
+    return render(request,"detail_teacher.html",{"user":user})
 def modify_teacher(request):
-    return render(request,"modify_teacher.html")
+    user=request.user.users
+    if request.method=="POST":
+        user.nick_name=request.POST.get("nick_name",'')
+        user.gender=request.POST.get("gender",'')
+        user.username=request.POST.get("username",'')
+        user.phone_number=request.POST.get("phone_number",'')
+        user.save()
+        return HttpResponseRedirect(reverse("detail_teacher"))
+    return render(request,"modify_teacher.html",{"user":user})
