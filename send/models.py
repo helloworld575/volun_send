@@ -59,8 +59,10 @@ class OrderForm(models.Model):
 
     stu_and_tea = models.ForeignKey(Users)       #the one who publish it
     # get_people = models.ForeignKey(TeacherUser)
-
+    get_address_case=models.CharField(max_length=3)
+    send_address_case=models.CharField(max_length=3)
     get_address = models.CharField(max_length = 256)
+
     send_address = models.CharField(max_length = 256)
 
     get_teacher = models.CharField(max_length = 20)

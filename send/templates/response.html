@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}订单信息{% endblock %}
+{% block righttoplink %}
+<li><a href="{% url "illustration"%}">Shared Route服务说明</a></li>
+<!--li><a href="#">Tour</a></li-->
+<li class="has-dropdown">
+    <a href="#">个人中心</a>
+    <ul class="dropdown">
+        <li><a href="{% url "detail_teacher"%}">个人资料</a></li>
+        <li><a href="{% url "log_out"%}">退出登录</a></li>
+        <!--li><a href="#">Branding</a></li>
+        <li><a href="#">API</a></li-->
+    </ul>
+</li>
+{% endblock %}
+{% block content %}
+        <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_3.jpg"%})" >
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <div class="row" >
+                    <div class="col-xs-12 col-sm-1">
+                        <br/>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 dialog" >
+                        <div class="tm-section-title" align="center">
+                            <img src="{% static "images/24_3.png"%}">
+                            恭喜！您已成功下单！
+                        </div>
+                        <div class="left-agileinfo">
+                            <img src="{% static "images/welcome.png"%}">
+                        </div>
+                        <div class="right-agileits-w3layouts">
+                            <fieldset>
+                              <div class="form-row">
+                                  <div class="field-label"><label for="field2">发送邮件从</label>:</div>
+                                  <br/>
+                                  <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                              </div>
+                              <div class="form-row">
+                                  <div class="field-label"><label for="field2">地址</label>:</div>
+                                  <br/>
+                                  <p class="tm-section-description"><span class="tm-blue-text">{{form.send_address}}</span> <br/> <span class="tm-red-text"></span></p>
+                              </div>
+                              <div class="form-row">
+                                  <div class="field-label"><label for="field2">联系方式</label>:</div>
+                                  <br/>
+                                  <p class="tm-section-description"><span class="tm-blue-text">{{form.send_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                              </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">发送邮件至</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">地址</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_address}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">联系方式</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_teacher_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">最晚取件时间</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.latest_get_time}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">备注</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.other_import}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">内容</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.content}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div align="center">
+                                    <p class="tm-section-description">===============</p>
+                                </div>
+                                {% if form.get_student %}
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">志愿者</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_student}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">联系方式</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_student_phone}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                {% else %}
+                                <div class="form-row">
+                                    <p class="tm-section-description"><span class="tm-blue-text">还没有人接单哦</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                {% endif %}
+                            </fieldset>
+                            <div class="tm-section-description">
+                                <button type="submit" class="btn btn-primary" onclick="{location.href='{% url "send_index"%}'}" >返回</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <br/>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+                </div>
+            </div>
+        </header>
+{% endblock %}

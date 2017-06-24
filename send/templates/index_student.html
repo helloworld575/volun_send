@@ -37,6 +37,7 @@
         </li>
 {% endblock %}
 {% block content %}
+
         <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url({% static "images/img_4_3.jpg" %})" >
             <div class="overlay"></div>
             <div class="gtco-container">
@@ -48,15 +49,18 @@
                             </div>
                             <div class="col-md-4 col-md-push-2 animate-box" data-animate-effect="fadeInRight">
                                 <a style="color:white" class="btn btn-primary" onclick="showBg();" >我要送件</a>
-
+                                <div>
+                                <h2 class="text-center" style="color:red;font-size:50px">{{state}}</h2>
+                                </div>
                                 <div id="fullbg"></div>
                                 <div id="dialog">
+
                                     <button class="close"><a href="" onclick="closeBg();">&nbsp;X&nbsp;</a></button>
                                     <div class="donate_form_w3l">
 
                                         <!-- form表单增加action -->
 
-                                        <form action="" rol="form" method="POST">
+                                        <form action="{% url 'stu_get_form'%}" rol="form" method="POST">
                                           {% csrf_token %}
 
 
@@ -126,7 +130,6 @@
                                                         <div class="field-label"><label for="field6">送件时间(如立即送件请忽略):</label></div>
                                                         <div class="field-widget">
                                                             <select id="field6" name="time" class="validate-selection" title="Choose your department">
-                                                                <option value='0'>请选择</option>
                                                                 <option value='1'>8:00</option>
                                                                 <option value='2'>9:00</option>
                                                                 <option value='3'>10:00</option>
