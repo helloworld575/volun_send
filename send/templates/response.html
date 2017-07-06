@@ -100,9 +100,29 @@
                                     <p class="tm-section-description"><span class="tm-blue-text">还没有人接单哦</span> <br/> <span class="tm-red-text"></span></p>
                                 </div>
                                 {% endif %}
+                                {% if form.order_case=="2" %}
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">发送订单时间</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.pub_time}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">订单接收时间</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.get_order_time}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field-label"><label for="field2">确认接收订单时间</label>:</div>
+                                    <br/>
+                                    <p class="tm-section-description"><span class="tm-blue-text">{{form.actual_send_time}}</span> <br/> <span class="tm-red-text"></span></p>
+                                </div>
+                                {% endif %}
                             </fieldset>
                             <div class="tm-section-description">
-                                <button type="submit" class="btn btn-primary" onclick="{location.href='{% url "send_index"%}'}" >返回</button>
+                                <a class="btn btn-primary" href='{% url "send_index"%}' >返回</button>
+                                  {% if user==form.stu_and_tea and form.order_case!='2' %}
+                                <a class="btn btn-primary" href='{% url "verify_get"%}' >确认收件</button>
+                                  {% endif %}
                             </div>
                         </div>
                     </div>

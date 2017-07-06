@@ -157,7 +157,7 @@ def stu_get_form(request):
                         form.order_case='1'
                         form.save()
                         state='success'
-                        return render(request,"response.html",{'form':form,'state':state})
+                        return render(request,"response.html",{'user':user,'form':form,'state':state})
             elif send_type=='2':
                 state='5'
                 stu_get_time=get_time(request.POST.get('time',''))
@@ -170,7 +170,7 @@ def stu_get_form(request):
                             form.order_case='1'
                             form.save()
                             state='success'
-                            return render(request,"response.html",{'form':form,'state':state})
+                            return render(request,"response.html",{'user':user,'form':form,'state':state})
                     state="no_form_now"
         else:
             state='6'
@@ -215,7 +215,7 @@ def tea_set_form(request):
         )
         new_form.order_number=OrderForm.gen_order_num(new_form)
         new_form.save()
-        return render(request,"response.html",{'form':new_form,'state':state})
+        return render(request,"response.html",{'user':user,'form':new_form,'state':state})
     return render(request,"index_teacher.html")
 
 def stu_get_detail(request):
@@ -298,3 +298,12 @@ def modify_teacher(request):
         user.save()
         return HttpResponseRedirect(reverse("detail_teacher"))
     return render(request,"modify_teacher.html",{"user":user})
+def verify_get(request):
+    user=request.user.users
+    if user==form.stu_and_tea:
+        form=request.form
+        form.order_case='2'
+        form.save()
+    return HttpResponseRedirect(reverse("send_index"))
+def form_detail(request):
+    return render(request,"response.html",{"form":request.form})

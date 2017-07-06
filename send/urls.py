@@ -16,4 +16,6 @@ urlpatterns=[
     url(r'^detail_teacher',views.detail_teacher,name="detail_teacher"),
     url(r'^modify_student',views.modify_student,name="modify_student"),
     url(r'^modify_teacher',views.modify_teacher,name="modify_teacher"),
+    url(r'^verify_get',views.verify_get,name="verify_get"),
+    url(r'^form_detail',views.form_detail,name="form_detail"),
 ]
